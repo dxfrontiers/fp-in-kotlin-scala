@@ -1,6 +1,7 @@
 package de.digitalfrontiers.java;
 
 public class LuhnTest {
+
     public static boolean isValid(long number) {
         int sum = 0;
         boolean alternate = false;

@@ -6,15 +6,12 @@ data class Contact(
     val firstName: String,
     val lastName: String,
     val phoneNumber: String
-)
+) {
+    fun withPhoneNumber(phoneNumber: String) =
+        copy(phoneNumber = phoneNumber)
+}
 
 fun main() {
-
-    println("Luhn (expected: true): ${isValid(49927398716L)}")
-    println("Luhn (expected: false): ${isValid(49927398717L)}")
-
-    println("Luhn (expected: true): ${LuhnTestHO.isValid(49927398716L)}")
-    println("Luhn (expected: false): ${LuhnTestHO.isValid(49927398717L)}")
 
     val contact = Contact(
         firstName = "Max",
@@ -22,15 +19,16 @@ fun main() {
         phoneNumber = "01234-567890"
     )
 
-    val updatedContact = contact.copy(firstName = "Manuel")
+    val updatedContact = contact.copy(phoneNumber = "01337-424242")
+
+    val updatedContactWither = contact.withPhoneNumber("01337-424344")
 
     updatedContact.firstName
+    updatedContactWither.firstName
 
     divide(15, 4, 3)
     plus(3, 5)
     impurePlus(3, 5)
-
-    buyCoffee(CreditCard()).runCatching {  }
 
     listOf(3, 4, 5).toMutableList()
 
@@ -79,18 +77,3 @@ fun impurePlus(a: Int, b: Int): Int {
     println(a + b)
     return a + b;
 }
-
-fun buyCoffee(cc: CreditCard): Coffee {
-    val coffee = Coffee()
-    cc.charge(coffee.price)
-
-    return coffee
-}
-
-class CreditCard {
-    fun charge(amount: Double): Unit {
-
-    }
-}
-
-data class Coffee(val price: Double = 1.337)
